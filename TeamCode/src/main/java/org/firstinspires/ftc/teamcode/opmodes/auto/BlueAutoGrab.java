@@ -17,6 +17,8 @@ import org.yaml.snakeyaml.scanner.Constant;
 
 import java.util.Vector;
 
+import kotlin.Unit;
+
 @Autonomous()
 public class BlueAutoGrab extends LinearOpMode {
 
@@ -193,5 +195,11 @@ public class BlueAutoGrab extends LinearOpMode {
         }
     }
 
+    public void toStone(int stonePos, int offsetX, int offSetY) {
+        drive.followTrajectory(drive.trajectoryBuilder()
+                .lineTo(new Vector2d(-5,36),new ConstantInterpolator(Math.PI))
+                .splineTo(new Pose2d(-19-stonePos*8-offsetX,30.8-offSetY,Math.PI),new ConstantInterpolator(Math.PI))
+                .build());
+    }
 
 }
