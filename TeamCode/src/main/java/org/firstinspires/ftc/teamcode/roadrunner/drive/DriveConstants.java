@@ -31,12 +31,10 @@ public class DriveConstants {
     public static double kA = 0.0002;
     public static double kStatic = 0.128;
 
-
     public static DriveConstraints BASE_CONSTRAINTS = new DriveConstraints(
-            65.0, 50.0, 0.0,
-            Math.toRadians(120), Math.toRadians(120.0), 0.0
+            45.0, 45.0, 0.0,
+            Math.toRadians(180), Math.toRadians(180.0), 0.0
     );
-
 
     public static double encoderTicksToInches(int ticks) {
         return WHEEL_RADIUS * 2 * Math.PI * GEAR_RATIO * ticks / TICKS_PER_REV;

@@ -22,7 +22,7 @@ public class Hook {
         hookLeft = hardwareMap.servo.get("hookLeft");
         hookRight = hardwareMap.servo.get("hookRight");
 
-        open();
+        close();
     }
 
     public void open(){

@@ -11,7 +11,7 @@ public class LeftGrab {
     private Servo leftBig;
     private Servo leftSmall;
 
-    private double OPEN_POS = 0.15; // middle
+    private double OPEN_POS = 0.05; // middle
     private double CLOSE_POS = .6;
 
     private double RETRACT_POS = 0.5; // middle
@@ -28,6 +28,8 @@ public class LeftGrab {
 
 
     }
+
+    public void setSmallPosition(double pos) {leftSmall.setPosition(pos);}
 
     public void open(){
         leftSmall.setPosition(OPEN_POS);

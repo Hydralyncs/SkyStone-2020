@@ -13,10 +13,10 @@ public class RightGrab {
     private Servo rightSmall;
 
     private double OPEN_POS = 0.55;// middle
-    private double CLOSE_POS = 0.1;
+    private double CLOSE_POS = 0.05;
 
     private double RETRACT_POS = 0.45; // middle
-    private double EXTEND_POS = 0.85;
+    private double EXTEND_POS = 0.81;
 
 
     public RightGrab(HardwareMap hardwareMap){
