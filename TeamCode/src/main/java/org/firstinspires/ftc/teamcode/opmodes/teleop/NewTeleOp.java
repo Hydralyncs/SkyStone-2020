@@ -67,10 +67,15 @@ public class NewTeleOp extends LinearOpMode {
             dt.setDrivePower(new Pose2d(gamepad1.left_stick_y*multiplier, gamepad1.left_stick_x*multiplier, -gamepad1.right_stick_x * 0.85 * multiplier));
 
             // slide
-
+            lift.setPower(-gamepad2.left_stick_y);
 
             // lift
-            lift.setPower(-gamepad2.left_stick_y);
+
+            if(lift.getCurrentHeight()>7){
+                dt.setDrivePower(new Pose2d(gamepad1.left_stick_y*.3, gamepad1.left_stick_x*.3, -gamepad1.right_stick_x * 0.85 * .3));
+            }else {
+                dt.setDrivePower(new Pose2d(gamepad1.left_stick_y*multiplier, gamepad1.left_stick_x*multiplier, -gamepad1.right_stick_x * 0.85 * multiplier));
+            }
 
             // intake
             intake.setPower(gamepad2.right_trigger-gamepad2.left_trigger);
@@ -91,6 +96,7 @@ public class NewTeleOp extends LinearOpMode {
             if(!gamepad2.b){
                 bWasPressed = false;
             }
+
 
             // claw
 
