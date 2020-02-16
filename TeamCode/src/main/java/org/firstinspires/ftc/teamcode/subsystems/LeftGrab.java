@@ -11,7 +11,7 @@ public class LeftGrab {
     private Servo leftBig;
     private Servo leftSmall;
 
-    private double OPEN_POS = 0.05; // middle
+    private double OPEN_POS = 0.15; // middle
     private double CLOSE_POS = .6;
 
     private double RETRACT_POS = 0.5; // middle
@@ -24,7 +24,7 @@ public class LeftGrab {
         leftBig = hardwareMap.servo.get("leftBig");
 
         retract();
-        open();
+        setSmallPosition(0.2);
 
 
     }
@@ -50,7 +50,7 @@ public class LeftGrab {
     public void toggleSmall(){
         if(isClosed){
             isClosed = false;
-            open();
+            setSmallPosition(0.15);
         }else {
             isClosed = true;
             close();

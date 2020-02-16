@@ -12,10 +12,10 @@ public class RightGrab {
     private Servo rightBig;
     private Servo rightSmall;
 
-    private double OPEN_POS = 0.55;// middle
+    private double OPEN_POS = 0.8;// middle
     private double CLOSE_POS = 0.05;
 
-    private double RETRACT_POS = 0.45; // middle
+    private double RETRACT_POS = 0.4; // middle
     private double EXTEND_POS = 0.81;
 
 
@@ -25,10 +25,12 @@ public class RightGrab {
         rightBig = hardwareMap.servo.get("rightBig");
 
         retract();
-        open();
+        setSmallPosition(0.5);
 
 
     }
+
+    public void setSmallPosition(double position){ rightSmall.setPosition(position);}
 
     public void setBigPosition(double position){
         rightBig.setPosition(position);

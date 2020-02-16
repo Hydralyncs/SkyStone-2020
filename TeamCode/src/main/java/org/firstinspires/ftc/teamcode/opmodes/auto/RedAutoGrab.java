@@ -100,7 +100,7 @@ public class RedAutoGrab extends LinearOpMode {
 
         leftGrab.setBigPosition(0.25);
         sleep(50);
-        leftGrab.open();
+        leftGrab.setSmallPosition(0.3);
         sleep(100);
         leftGrab.retract();
         sleep(100);
@@ -154,7 +154,7 @@ public class RedAutoGrab extends LinearOpMode {
 
         leftGrab.setBigPosition(0.2);
         sleep(100);
-        leftGrab.open();
+        leftGrab.setSmallPosition(0.3);
         sleep(100);
         leftGrab.retract();
         sleep(100);

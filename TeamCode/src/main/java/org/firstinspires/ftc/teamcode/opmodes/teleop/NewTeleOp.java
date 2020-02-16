@@ -64,10 +64,10 @@ public class NewTeleOp extends LinearOpMode {
             }
 
             // drivetrain
-            dt.setDrivePower(new Pose2d(gamepad1.left_stick_y*multiplier, gamepad1.left_stick_x*multiplier, -gamepad1.right_stick_x * 0.85 * multiplier));
+            dt.setDrivePower(new Pose2d(Math.pow(gamepad1.left_stick_y,3)*multiplier, Math.pow(gamepad1.left_stick_x,3)*multiplier, Math.pow(-gamepad1.right_stick_x,3) * 0.85 * multiplier));
 
             // slide
-            lift.setPower(-gamepad2.left_stick_y);
+            lift.setPower(Math.pow(-gamepad2.left_stick_y,3));
 
             // lift
 
