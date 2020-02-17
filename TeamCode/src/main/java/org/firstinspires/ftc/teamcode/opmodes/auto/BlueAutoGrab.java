@@ -8,6 +8,7 @@ import com.acmerobotics.roadrunner.path.heading.LinearInterpolator;
 import com.acmerobotics.roadrunner.trajectory.TrajectoryBuilder;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Const;
 import org.firstinspires.ftc.teamcode.roadrunner.drive.DriveConstants;
@@ -15,6 +16,7 @@ import org.firstinspires.ftc.teamcode.subsystems.Detector;
 import org.firstinspires.ftc.teamcode.subsystems.DriveTrain;
 import org.firstinspires.ftc.teamcode.subsystems.Hook;
 import org.firstinspires.ftc.teamcode.subsystems.LeftGrab;
+import org.firstinspires.ftc.teamcode.subsystems.LiftExt;
 import org.firstinspires.ftc.teamcode.subsystems.RightGrab;
 import org.yaml.snakeyaml.scanner.Constant;
 
@@ -31,6 +33,7 @@ public class BlueAutoGrab extends LinearOpMode {
     private Detector detector;
     private LeftGrab leftGrab;
     private Hook hook;
+    private LiftExt lift;
 
     private int stonePosition = 0;
 
@@ -44,16 +47,19 @@ public class BlueAutoGrab extends LinearOpMode {
         rightGrab = new RightGrab(hardwareMap);
         leftGrab = new LeftGrab(hardwareMap);
         hook = new Hook(hardwareMap);
+        lift = new LiftExt(hardwareMap);
+
+        lift.retract();
 
         hook.close();
 
         leftGrab.retract();
-        leftGrab.open();
+        leftGrab.close();
 
         rightGrab.retract();
         rightGrab.open();
 
-        drive.setPoseEstimate(new Pose2d(-39, 62, Math.toRadians(-90)));
+        drive.setPoseEstimate(new Pose2d(-39, 63, Math.toRadians(-90)));
         //rightGrab.open();
 
         detector.startStreaming();
@@ -101,15 +107,15 @@ public class BlueAutoGrab extends LinearOpMode {
         update();
 
         drive.followTrajectory(drive.trajectoryBuilder()
-                .lineTo(new Vector2d(-44-(stonePosition*8),31),new ConstantInterpolator(Math.PI))
+                .lineTo(new Vector2d(-44-(stonePosition*8),33),new ConstantInterpolator(Math.PI))
                 .build());
         update();
 
-        sleep(100);
+        waitFor(100);
         rightGrab.close();
-        sleep(400);
+        waitFor(400);
         rightGrab.setBigPosition(0.5);
-        sleep(100);
+        waitFor(100);
 
 
 
@@ -124,11 +130,12 @@ public class BlueAutoGrab extends LinearOpMode {
 
 
         rightGrab.setBigPosition(0.6);
-        sleep(100);
+        waitFor(100);
         rightGrab.setSmallPosition(0.5);
-        sleep(100);
+        waitFor(100);
         rightGrab.retract();
-        sleep(100);
+        waitFor(200);
+        rightGrab.close();
 
 
 
@@ -139,7 +146,7 @@ public class BlueAutoGrab extends LinearOpMode {
             yOffset = 0;
         }
         if(stonePosition == 2){
-            yOffset = -0.4;
+            yOffset = 0;
         }
 
         double xOffset = 0;
@@ -161,7 +168,7 @@ public class BlueAutoGrab extends LinearOpMode {
                     rightGrab.open();
                     return Unit.INSTANCE;
                 })
-                .splineTo(new Pose2d(-19-stonePosition*8,32,Math.PI),new ConstantInterpolator(Math.PI))
+                .splineTo(new Pose2d(-19-stonePosition*8,33,Math.PI),new ConstantInterpolator(Math.PI))
                 .build());
         update();
 
@@ -170,15 +177,15 @@ public class BlueAutoGrab extends LinearOpMode {
                     rightGrab.extend();
                     return Unit.INSTANCE;
                 })
-                .lineTo(new Vector2d(-19-stonePosition*8,30),new ConstantInterpolator(Math.PI))
+                .lineTo(new Vector2d(-19-stonePosition*8,32),new ConstantInterpolator(Math.PI))
                 .build());
         update();
 
-        sleep(100);
+        waitFor(100);
         rightGrab.close();
-        sleep(400);
+        waitFor(400);
         rightGrab.setBigPosition(0.5);
-        sleep(100);
+        waitFor(100);
 
 
 
@@ -192,12 +199,13 @@ public class BlueAutoGrab extends LinearOpMode {
         update();
 
         rightGrab.setBigPosition(0.6);
-        sleep(100);
+        waitFor(100);
         rightGrab.setSmallPosition(0.5);
-        sleep(100);
+        waitFor(100);
         rightGrab.setBigPosition(0.5);
-        sleep(100);
-
+        waitFor(200);
+        rightGrab.close();
+/*
         drive.followTrajectory(drive.trajectoryBuilder()
                 .lineTo(new Vector2d(60,36),new LinearInterpolator(Math.PI,-Math.PI/2))
                 .lineTo(new Vector2d(60,28),new ConstantInterpolator(Math.PI/2))
@@ -205,29 +213,29 @@ public class BlueAutoGrab extends LinearOpMode {
         update();
 
         hook.open();
-        sleep(300);
+        waitFor(300);
 
         drive.followTrajectory(drive.trajectoryBuilder()
                 .lineTo(new Vector2d(40,64),new LinearInterpolator(Math.PI/2,Math.PI/1.5))
                 .build());
         update();
         hook.close();
-        sleep(100);
+        waitFor(100);
 
         drive.followTrajectory(drive.trajectoryBuilder()
                 .splineTo(new Pose2d(20,48,Math.PI))
                 .lineTo(new Vector2d(4,48),new ConstantInterpolator(Math.PI))
                 .build());
         update();
+*/
 
-        /*
 
         drive.followTrajectory(drive.trajectoryBuilder()
                 .splineTo(new Pose2d(5,34,Math.PI),new ConstantInterpolator(Math.PI))
                 .build());
         update();
 
-         */
+
 
 
 
@@ -240,11 +248,11 @@ public class BlueAutoGrab extends LinearOpMode {
         update();
 
         rightGrab.extend();
-        sleep(700);
+        waitFor(700);
         rightGrab.open();
-        sleep(250);
+        waitFor(250);
         rightGrab.retract();
-        sleep(500);
+        waitFor(500);
 
         drive.followTrajectory(drive.trajectoryBuilder()
                 .lineTo(new Vector2d(0,36)).build());
@@ -268,6 +276,16 @@ public class BlueAutoGrab extends LinearOpMode {
                 .lineTo(new Vector2d(-5,36),new ConstantInterpolator(Math.PI))
                 .splineTo(new Pose2d(-19-stonePos*8-offsetX,30.8-offSetY,Math.PI),new ConstantInterpolator(Math.PI))
                 .build());
+    }
+
+    public void waitFor(double millis){
+
+        ElapsedTime timer = new ElapsedTime();
+
+        while(timer.milliseconds()<millis&&!isStopRequested()){
+            drive.update();
+        }
+
     }
 
 }

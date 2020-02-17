@@ -24,7 +24,7 @@ public class LeftGrab {
         leftBig = hardwareMap.servo.get("leftBig");
 
         retract();
-        setSmallPosition(0.2);
+        setSmallPosition(0.5);
 
 
     }

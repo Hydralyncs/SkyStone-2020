@@ -15,7 +15,7 @@ public class RightGrab {
     private double OPEN_POS = 0.8;// middle
     private double CLOSE_POS = 0.05;
 
-    private double RETRACT_POS = 0.4; // middle
+    private double RETRACT_POS = 0.37; // middle
     private double EXTEND_POS = 0.81;
 
 
@@ -25,8 +25,9 @@ public class RightGrab {
         rightBig = hardwareMap.servo.get("rightBig");
 
         retract();
-        setSmallPosition(0.5);
-
+        setSmallPosition(0.4);
+        System.out.println("ur bad");
+        // jk ok
 
     }
 

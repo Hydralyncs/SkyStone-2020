@@ -22,7 +22,7 @@ import org.openftc.revextensions2.ExpansionHubEx;
 @Config
 public class LiftExt {
 
-    public static double RETRACT_POS = 1;
+    public static double RETRACT_POS = 0.975;
     public static double EXTEND_POS = 0.475;
 
     public static PIDCoefficients VELOCITY_PID = new PIDCoefficients(25,0,1);

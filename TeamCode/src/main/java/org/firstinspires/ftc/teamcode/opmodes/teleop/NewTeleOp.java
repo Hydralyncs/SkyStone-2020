@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import org.firstinspires.ftc.teamcode.subsystems.CapstoneMechanism;
 import org.firstinspires.ftc.teamcode.subsystems.Claw;
 import org.firstinspires.ftc.teamcode.subsystems.DriveTrain;
 import org.firstinspires.ftc.teamcode.subsystems.Hook;
@@ -18,6 +19,7 @@ import org.firstinspires.ftc.teamcode.subsystems.RightGrab;
 @TeleOp(name="New TeleOp",group="teleop")
 public class NewTeleOp extends LinearOpMode {
 
+    private CapstoneMechanism capstoneMechanism;
     private Claw claw;
     private DriveTrain dt;
     private Hook hook;
@@ -39,6 +41,7 @@ public class NewTeleOp extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
+        capstoneMechanism = new CapstoneMechanism(hardwareMap);
         leftGrab = new LeftGrab(hardwareMap);
         claw = new Claw(hardwareMap);
         hook = new Hook(hardwareMap);
@@ -102,19 +105,10 @@ public class NewTeleOp extends LinearOpMode {
 
             if(gamepad2.x && !xWasPressed){
                 xWasPressed = true;
-                rightGrab.toggleSmall();
+                capstoneMechanism.toggle();
             }
             if(!gamepad2.x){
                 xWasPressed = false;
-            }
-
-
-            if(gamepad2.y && !yWasPressed){
-                yWasPressed = true;
-                rightGrab.toggleBig();
-            }
-            if(!gamepad2.y){
-                yWasPressed = false;
             }
 
             if(gamepad2.a && !a2WasPressed){
@@ -125,21 +119,7 @@ public class NewTeleOp extends LinearOpMode {
                 a2WasPressed = false;
             }
 
-            if(gamepad1.x && !x2WasPressed){
-                x2WasPressed = true;
-                leftGrab.toggleSmall();
-            }
-            if(!gamepad1.x){
-                x2WasPressed = false;
-            }
 
-            if(gamepad1.y && !y2WasPressed){
-                y2WasPressed = true;
-                leftGrab.toggleBig();
-            }
-            if(!gamepad1.y){
-                y2WasPressed = false;
-            }
 
 
 

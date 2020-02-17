@@ -11,10 +11,10 @@ public class Hook {
     private Servo hookRight;
 
     public static double RIGHT_OPEN_POS = 0.2;
-    public static double LEFT_OPEN_POS = 0.15;
+    public static double LEFT_OPEN_POS = 0;
 
     public static double RIGHT_CLOSE_POS = 1;
-    public static double LEFT_CLOSE_POS = 0.6;
+    public static double LEFT_CLOSE_POS = 0.75;
 
     private boolean isClosed;
 

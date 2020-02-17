@@ -2,20 +2,23 @@ package org.firstinspires.ftc.teamcode.subsystems;
 
 import android.graphics.Paint;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+@Config
 public class CapstoneMechanism {
 
     private boolean isExtended = false;
 
-    public static double EXTEND_POS = 1;
-    public static double RETRACT_POS = 0;
+    public static double EXTEND_POS = 0.65;
+    public static double RETRACT_POS = 0.15;
 
     private Servo servo;
 
     public CapstoneMechanism(HardwareMap hardwareMap){
         servo = hardwareMap.servo.get("capstone");
+        retract();
     }
 
     public void extend(){
