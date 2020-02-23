@@ -36,8 +36,8 @@ import org.firstinspires.ftc.teamcode.roadrunner.util.DashboardUtil;
  */
 @Config
 public abstract class SampleMecanumDrive extends MecanumDrive {
-    public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(7, 0, 0.05);
-    public static PIDCoefficients HEADING_PID = new PIDCoefficients(3, 0, 0.3);
+    public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(7, 0, 0.3);
+    public static PIDCoefficients HEADING_PID = new PIDCoefficients(3, 0, 0.1);
     public static PIDCoefficients VELOCITY_PID = new PIDCoefficients(20,0,3);
 
 
@@ -71,7 +71,7 @@ public abstract class SampleMecanumDrive extends MecanumDrive {
         turnController.setInputBounds(0, 2 * Math.PI);
 
         constraints = new MecanumConstraints(BASE_CONSTRAINTS, TRACK_WIDTH);
-        follower = new HolonomicPIDVAFollower(TRANSLATIONAL_PID, TRANSLATIONAL_PID, HEADING_PID);
+        follower = new HolonomicPIDVAFollower(TRANSLATIONAL_PID, new PIDCoefficients(TRANSLATIONAL_PID.kP*1.5,0,TRANSLATIONAL_PID.kD), HEADING_PID);
     }
 
     public TrajectoryBuilder trajectoryBuilder() {

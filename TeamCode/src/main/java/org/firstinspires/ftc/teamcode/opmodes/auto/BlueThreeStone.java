@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.opmodes.auto;
 
-
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.path.heading.ConstantInterpolator;
@@ -25,7 +24,7 @@ import java.util.Vector;
 import kotlin.Unit;
 
 @Autonomous()
-public class BlueAutoGrab extends LinearOpMode {
+public class BlueThreeStone extends LinearOpMode {
 
 
     private DriveTrain drive;
@@ -59,7 +58,7 @@ public class BlueAutoGrab extends LinearOpMode {
         rightGrab.retract();
         rightGrab.open();
 
-        drive.setPoseEstimate(new Pose2d(-39, 63, Math.toRadians(-90)));
+        drive.setPoseEstimate(new Pose2d(-38, 63, Math.toRadians(-90)));
         //rightGrab.open();
 
         detector.startStreaming();
@@ -88,8 +87,9 @@ public class BlueAutoGrab extends LinearOpMode {
         }
 
         drive.followTrajectory(drive.trajectoryBuilder()
-                .addMarker(1,()->{
-                    rightGrab.setBigPosition(0.75);
+                .addMarker(0.8,()->{
+                    rightGrab.setBigPosition(0.76);
+                    rightGrab.setSmallPosition(0.8);
                     return Unit.INSTANCE;
                 })
                 .splineTo(new Pose2d(-53,38,Math.toRadians(180)))
@@ -97,21 +97,11 @@ public class BlueAutoGrab extends LinearOpMode {
         update();
 
         drive.followTrajectory(drive.trajectoryBuilder()
-
-                .addMarker(()->{
-                    rightGrab.extend();
-                    return Unit.INSTANCE;
-                })
-                .lineTo(new Vector2d(-44-(stonePosition*8)-offset,33),new ConstantInterpolator(Math.PI))
+                .lineTo(new Vector2d(-44-(stonePosition*8)-offset,32),new ConstantInterpolator(Math.PI))
                 .build());
         update();
 
-        drive.followTrajectory(drive.trajectoryBuilder()
-                .lineTo(new Vector2d(-44-(stonePosition*8),33),new ConstantInterpolator(Math.PI))
-                .build());
-        update();
-
-        waitFor(100);
+        rightGrab.extend();
         rightGrab.close();
         waitFor(400);
         rightGrab.setBigPosition(0.5);
@@ -123,7 +113,7 @@ public class BlueAutoGrab extends LinearOpMode {
                 .reverse()
                 .splineTo(new Pose2d(-12,40,Math.toRadians(180)),new ConstantInterpolator(Math.PI))
                 .lineTo(new Vector2d(12,40))
-                .splineTo(new Pose2d(49,30,Math.toRadians(180)), new ConstantInterpolator(Math.PI))
+                .splineTo(new Pose2d(49,28.5,Math.toRadians(180)), new ConstantInterpolator(Math.PI))
                 .build());
 
         update();
@@ -134,55 +124,31 @@ public class BlueAutoGrab extends LinearOpMode {
         rightGrab.setSmallPosition(0.5);
         waitFor(100);
         rightGrab.retract();
-        waitFor(200);
         rightGrab.close();
 
 
-
-
-
-        double yOffset = 0;
-        if(stonePosition == 1){
-            yOffset = 0;
-        }
-        if(stonePosition == 2){
-            yOffset = 0;
-        }
-
-        double xOffset = 0;
-        if(stonePosition == 2){
-            xOffset = 0;
-        }
-        if(stonePosition == 1){
-            xOffset = 0;
-        }
-
         drive.followTrajectory(drive.trajectoryBuilder()
-                .splineTo(new Pose2d(-5,36,Math.PI),new ConstantInterpolator(Math.PI))
-                .build());
-        update();
-
-        drive.followTrajectory(drive.trajectoryBuilder()
+                .splineTo(new Pose2d(-5,34,Math.PI),new ConstantInterpolator(Math.PI))
                 .addMarker(()->{
-                    rightGrab.setBigPosition(0.75);
+                    rightGrab.setBigPosition(0.78);
                     rightGrab.open();
                     return Unit.INSTANCE;
                 })
-                .splineTo(new Pose2d(-19-stonePosition*8,33,Math.PI),new ConstantInterpolator(Math.PI))
+                .splineTo(new Pose2d(-20-stonePosition*8,33,Math.PI),new ConstantInterpolator(Math.PI))
                 .build());
         update();
 
         drive.followTrajectory(drive.trajectoryBuilder()
-                .addMarker(()->{
+                .addMarker(new Vector2d(-20-stonePosition*8,31),()->{
                     rightGrab.extend();
+                    rightGrab.close();
                     return Unit.INSTANCE;
                 })
-                .lineTo(new Vector2d(-19-stonePosition*8,32),new ConstantInterpolator(Math.PI))
+                .lineTo(new Vector2d(-20-stonePosition*8,30),new ConstantInterpolator(Math.PI))
                 .build());
         update();
 
-        waitFor(100);
-        rightGrab.close();
+
         waitFor(400);
         rightGrab.setBigPosition(0.5);
         waitFor(100);
@@ -191,10 +157,9 @@ public class BlueAutoGrab extends LinearOpMode {
 
         drive.followTrajectory(drive.trajectoryBuilder()
                 .reverse()
-                .splineTo(new Pose2d(-8,38,Math.PI),new ConstantInterpolator(Math.PI))
-                .lineTo(new Vector2d(12,38),new ConstantInterpolator(Math.PI))
-                .splineTo(new Pose2d(58,29
-                        ,Math.PI),new ConstantInterpolator(Math.PI))
+                .splineTo(new Pose2d(-5,37,Math.PI),new ConstantInterpolator(Math.PI))
+                .lineTo(new Vector2d(12,37),new ConstantInterpolator(Math.PI))
+                .splineTo(new Pose2d(57,27.5,Math.PI),new ConstantInterpolator(Math.PI))
                 .build());
         update();
 
@@ -202,13 +167,69 @@ public class BlueAutoGrab extends LinearOpMode {
         waitFor(100);
         rightGrab.setSmallPosition(0.5);
         waitFor(100);
-        rightGrab.setBigPosition(0.5);
-        waitFor(200);
-        rightGrab.close();
+
+
+
+
+        double thirdStoneXPos = -20;
+        if(stonePosition == 0){
+            thirdStoneXPos = -28;
+        }
 
         drive.followTrajectory(drive.trajectoryBuilder()
-                .lineTo(new Vector2d(60,36),new LinearInterpolator(Math.PI,-Math.PI/2))
-                .lineTo(new Vector2d(60,28),new ConstantInterpolator(Math.PI/2))
+                .addMarker(()->{
+                    rightGrab.retract();
+                    rightGrab.close();
+                    return Unit.INSTANCE;
+                })
+                .splineTo(new Pose2d(5,34,Math.PI),new ConstantInterpolator(Math.PI))
+                .addMarker(new Vector2d(-2,34),()->{
+                    rightGrab.setBigPosition(0.78);
+                    rightGrab.open();
+                    return Unit.INSTANCE;
+                })
+                .splineTo(new Pose2d(thirdStoneXPos,30,Math.PI),new ConstantInterpolator(Math.PI))
+                .build());
+        update();
+
+        drive.followTrajectory(drive.trajectoryBuilder()
+                .addMarker(new Vector2d(thirdStoneXPos,28),()->{
+                    rightGrab.close();
+                    return Unit.INSTANCE;
+                })
+                .lineTo(new Vector2d(thirdStoneXPos,27),new ConstantInterpolator(Math.PI))
+                .build());
+        update();
+
+        waitFor(300);
+
+        rightGrab.setBigPosition(0.5);
+        waitFor(100);
+
+        drive.followTrajectory(drive.trajectoryBuilder()
+                .reverse()
+                .splineTo(new Pose2d(-5,35,Math.PI),new ConstantInterpolator(Math.PI))
+                .lineTo(new Vector2d(12,35),new ConstantInterpolator(Math.PI))
+                .splineTo(new Pose2d(44,26.5,Math.PI),new ConstantInterpolator(Math.PI))
+                .build());
+        update();
+
+        rightGrab.setBigPosition(0.6);
+        waitFor(100);
+        rightGrab.setSmallPosition(0.5);
+        waitFor(100);
+
+        drive.followTrajectory(drive.trajectoryBuilder()
+                .addMarker(()->{
+                    rightGrab.retract();
+                    return Unit.INSTANCE;
+                })
+                .addMarker(0.2,()->{
+                    rightGrab.close();
+                    return Unit.INSTANCE;
+                })
+                .lineTo(new Vector2d(58,30),new LinearInterpolator(Math.PI,-Math.PI/2))
+                .lineTo(new Vector2d(58,21),new ConstantInterpolator(Math.PI/2))
                 .build());
         update();
 
@@ -223,15 +244,8 @@ public class BlueAutoGrab extends LinearOpMode {
         waitFor(100);
 
         drive.followTrajectory(drive.trajectoryBuilder()
-                .splineTo(new Pose2d(20,48,Math.PI))
-                .lineTo(new Vector2d(4,48),new ConstantInterpolator(Math.PI))
-                .build());
-        update();
-
-
-
-        drive.followTrajectory(drive.trajectoryBuilder()
-                .splineTo(new Pose2d(5,34,Math.PI),new ConstantInterpolator(Math.PI))
+                .splineTo(new Pose2d(20,44,Math.PI),new ConstantInterpolator(Math.PI))
+                .lineTo(new Vector2d(4,44),new ConstantInterpolator(Math.PI))
                 .build());
         update();
 
@@ -239,26 +253,6 @@ public class BlueAutoGrab extends LinearOpMode {
 
 
 
-/*
-        drive.followTrajectory(drive.trajectoryBuilder()
-                .reverse()
-                .splineTo(new Pose2d(0,36,Math.toRadians(180)))
-                .lineTo(new Vector2d(40,36)).build());
-
-        update();
-
-        rightGrab.extend();
-        waitFor(700);
-        rightGrab.open();
-        waitFor(250);
-        rightGrab.retract();
-        waitFor(500);
-
-        drive.followTrajectory(drive.trajectoryBuilder()
-                .lineTo(new Vector2d(0,36)).build());
-
-        update();
-        */
 
     }
     public void update(){

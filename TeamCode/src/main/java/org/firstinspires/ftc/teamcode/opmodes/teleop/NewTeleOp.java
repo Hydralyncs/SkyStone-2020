@@ -37,6 +37,10 @@ public class NewTeleOp extends LinearOpMode {
     private boolean yWasPressed = false;
     private boolean a2WasPressed = false;
 
+    private double xPower;
+    private double yPower;
+    private double turnPower;
+    private double denominator;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -51,8 +55,10 @@ public class NewTeleOp extends LinearOpMode {
         rightGrab = new RightGrab(hardwareMap);
 
 
-        leftGrab.open();
+        leftGrab.close();
         leftGrab.retract();
+        rightGrab.close();
+        rightGrab.retract();
         double multiplier=0.5;
         waitForStart();
 
@@ -66,18 +72,39 @@ public class NewTeleOp extends LinearOpMode {
                 multiplier = 0.5;
             }
 
+            xPower = Math.pow(gamepad1.left_stick_y,3)*multiplier;
+            yPower = Math.pow(gamepad1.left_stick_x,3)*multiplier;
+            turnPower = Math.pow(-gamepad1.right_stick_x,3) * 0.85 * multiplier;
+
+            if(Math.abs(xPower) + Math.abs(yPower) + Math.abs(turnPower) > 1){
+                denominator = Math.abs(xPower) + Math.abs(yPower) + Math.abs(turnPower);
+                xPower = xPower/denominator;
+                yPower = yPower/denominator;
+                turnPower = turnPower/denominator;
+                dt.setDrivePower(new Pose2d(xPower,yPower,turnPower));
+            } else {
+                dt.setDrivePower(new Pose2d(xPower,yPower,turnPower));
+            }
+
+
+
             // drivetrain
-            dt.setDrivePower(new Pose2d(Math.pow(gamepad1.left_stick_y,3)*multiplier, Math.pow(gamepad1.left_stick_x,3)*multiplier, Math.pow(-gamepad1.right_stick_x,3) * 0.85 * multiplier));
+
 
             // slide
-            lift.setPower(Math.pow(-gamepad2.left_stick_y,3));
+            if(lift.isExtended && claw.isClosed && gamepad2.left_stick_y > 0){
+                lift.setPower(Math.pow(-gamepad2.left_stick_y,3)*0.13);
+            } else {
+                /*
+                double liftHeight = lift.getCurrentHeight();
+                double liftPower = Math.pow(-gamepad2.left_stick_y,3)*(1+LiftExt.GRAVITY_FF);
+                if(liftHeight<5&&gamepad2.left_stick_y>0.4){
+                    lift.setPower(Math.pow(liftPower,3)*(liftHeight/5-liftHeight));
+                }else {
 
-            // lift
+                 */
+                    lift.setPower(Math.pow(-gamepad2.left_stick_y,3)*(1+LiftExt.GRAVITY_FF));
 
-            if(lift.getCurrentHeight()>7){
-                dt.setDrivePower(new Pose2d(gamepad1.left_stick_y*.3, gamepad1.left_stick_x*.3, -gamepad1.right_stick_x * 0.85 * .3));
-            }else {
-                dt.setDrivePower(new Pose2d(gamepad1.left_stick_y*multiplier, gamepad1.left_stick_x*multiplier, -gamepad1.right_stick_x * 0.85 * multiplier));
             }
 
             // intake

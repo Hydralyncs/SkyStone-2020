@@ -15,24 +15,22 @@ public class DriveConstants {
 
     private static final MotorConfigurationType MOTOR_CONFIG =
             MotorConfigurationType.getMotorType(NeveRest20Gearmotor.class);
-    private static final double TICKS_PER_REV = 537.6;
+    private static final double TICKS_PER_REV = 383.6;
 
     public static double WHEEL_RADIUS = 2;
     public static double GEAR_RATIO = 1; // output (wheel) speed / input (motor) speed
-    public static double TRACK_WIDTH = 13.5;
-
-
+    public static double TRACK_WIDTH = 15;
 
     /*
      * Tune these!!!!
      */
 
-    public static double kV = 0.012;
-    public static double kA = 0.0002;
-    public static double kStatic = 0.128;
+    public static double kV = 0.0105;
+    public static double kA = 0.002;
+    public static double kStatic = 0.08;
 
     public static DriveConstraints BASE_CONSTRAINTS = new DriveConstraints(
-            45.0, 45.0, 0.0,
+            60.0, 40.0, 0.0,
             Math.toRadians(180), Math.toRadians(180.0), 0.0
     );
 
@@ -45,6 +43,6 @@ public class DriveConstants {
     }
 
     public static double getMaxRpm() {
-        return 312;
+        return 435;
     }
 }
