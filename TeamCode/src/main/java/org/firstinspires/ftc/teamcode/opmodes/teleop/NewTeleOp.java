@@ -41,6 +41,7 @@ public class NewTeleOp extends LinearOpMode {
     private double yPower;
     private double turnPower;
     private double denominator;
+    private double magnitude;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -72,9 +73,11 @@ public class NewTeleOp extends LinearOpMode {
                 multiplier = 0.5;
             }
 
-            xPower = Math.pow(gamepad1.left_stick_y,3)*multiplier;
-            yPower = Math.pow(gamepad1.left_stick_x,3)*multiplier;
-            turnPower = Math.pow(-gamepad1.right_stick_x,3) * 0.85 * multiplier;
+
+            magnitude = Math.pow(Math.sqrt(Math.pow(gamepad1.left_stick_y,2)+Math.pow(gamepad1.left_stick_x,2)),3);
+            xPower = gamepad1.left_stick_y * magnitude * multiplier;
+            yPower = gamepad1.left_stick_x * magnitude * multiplier;
+            turnPower = Math.pow(-gamepad1.right_stick_x,3) * multiplier;
 
             if(Math.abs(xPower) + Math.abs(yPower) + Math.abs(turnPower) > 1){
                 denominator = Math.abs(xPower) + Math.abs(yPower) + Math.abs(turnPower);
@@ -95,16 +98,7 @@ public class NewTeleOp extends LinearOpMode {
             if(lift.isExtended && claw.isClosed && gamepad2.left_stick_y > 0){
                 lift.setPower(Math.pow(-gamepad2.left_stick_y,3)*0.13);
             } else {
-                /*
-                double liftHeight = lift.getCurrentHeight();
-                double liftPower = Math.pow(-gamepad2.left_stick_y,3)*(1+LiftExt.GRAVITY_FF);
-                if(liftHeight<5&&gamepad2.left_stick_y>0.4){
-                    lift.setPower(Math.pow(liftPower,3)*(liftHeight/5-liftHeight));
-                }else {
-
-                 */
-                    lift.setPower(Math.pow(-gamepad2.left_stick_y,3)*(1+LiftExt.GRAVITY_FF));
-
+                lift.setPower(Math.pow(-gamepad2.left_stick_y,3)*1.1);
             }
 
             // intake

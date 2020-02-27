@@ -109,9 +109,9 @@ public class BlueThreeStone extends LinearOpMode {
 
 
 
-        drive.followTrajectory(drive.trajectoryBuilder()
+        drive.followTrajectory(new TrajectoryBuilder(new Pose2d(drive.getPoseEstimate().getX(),drive.getPoseEstimate().getY(),-Math.PI/1.3),DriveConstants.BASE_CONSTRAINTS)
                 .reverse()
-                .splineTo(new Pose2d(-12,40,Math.toRadians(180)),new ConstantInterpolator(Math.PI))
+                .splineTo(new Pose2d(-30,40,Math.toRadians(180)),new ConstantInterpolator(Math.PI))
                 .lineTo(new Vector2d(12,40))
                 .splineTo(new Pose2d(49,28.5,Math.toRadians(180)), new ConstantInterpolator(Math.PI))
                 .build());
@@ -128,18 +128,18 @@ public class BlueThreeStone extends LinearOpMode {
 
 
         drive.followTrajectory(drive.trajectoryBuilder()
-                .splineTo(new Pose2d(-5,34,Math.PI),new ConstantInterpolator(Math.PI))
+                .splineTo(new Pose2d(-5,35,Math.PI),new ConstantInterpolator(Math.PI))
                 .addMarker(()->{
                     rightGrab.setBigPosition(0.78);
                     rightGrab.open();
                     return Unit.INSTANCE;
                 })
-                .splineTo(new Pose2d(-20-stonePosition*8,33,Math.PI),new ConstantInterpolator(Math.PI))
+                .splineTo(new Pose2d(-20-stonePosition*8,32,Math.PI),new ConstantInterpolator(Math.PI))
                 .build());
         update();
 
         drive.followTrajectory(drive.trajectoryBuilder()
-                .addMarker(new Vector2d(-20-stonePosition*8,31),()->{
+                .addMarker(new Vector2d(-20-stonePosition*8,30.5),()->{
                     rightGrab.extend();
                     rightGrab.close();
                     return Unit.INSTANCE;
@@ -155,11 +155,11 @@ public class BlueThreeStone extends LinearOpMode {
 
 
 
-        drive.followTrajectory(drive.trajectoryBuilder()
+        drive.followTrajectory(new TrajectoryBuilder(new Pose2d(drive.getPoseEstimate().getX(),drive.getPoseEstimate().getY(),-Math.PI/2),DriveConstants.BASE_CONSTRAINTS)
                 .reverse()
-                .splineTo(new Pose2d(-5,37,Math.PI),new ConstantInterpolator(Math.PI))
-                .lineTo(new Vector2d(12,37),new ConstantInterpolator(Math.PI))
-                .splineTo(new Pose2d(57,27.5,Math.PI),new ConstantInterpolator(Math.PI))
+                .splineTo(new Pose2d(-5,38,Math.PI),new ConstantInterpolator(Math.PI))
+                .lineTo(new Vector2d(12,38),new ConstantInterpolator(Math.PI))
+                .splineTo(new Pose2d(58,27,Math.PI),new ConstantInterpolator(Math.PI))
                 .build());
         update();
 
@@ -182,8 +182,8 @@ public class BlueThreeStone extends LinearOpMode {
                     rightGrab.close();
                     return Unit.INSTANCE;
                 })
-                .splineTo(new Pose2d(5,34,Math.PI),new ConstantInterpolator(Math.PI))
-                .addMarker(new Vector2d(-2,34),()->{
+                .splineTo(new Pose2d(5,35,Math.PI),new ConstantInterpolator(Math.PI))
+                .addMarker(new Vector2d(-2,35),()->{
                     rightGrab.setBigPosition(0.78);
                     rightGrab.open();
                     return Unit.INSTANCE;
@@ -206,11 +206,11 @@ public class BlueThreeStone extends LinearOpMode {
         rightGrab.setBigPosition(0.5);
         waitFor(100);
 
-        drive.followTrajectory(drive.trajectoryBuilder()
+        drive.followTrajectory(new TrajectoryBuilder(new Pose2d(drive.getPoseEstimate().getX(),drive.getPoseEstimate().getY(),-Math.PI/1.5),DriveConstants.BASE_CONSTRAINTS)
                 .reverse()
-                .splineTo(new Pose2d(-5,35,Math.PI),new ConstantInterpolator(Math.PI))
-                .lineTo(new Vector2d(12,35),new ConstantInterpolator(Math.PI))
-                .splineTo(new Pose2d(44,26.5,Math.PI),new ConstantInterpolator(Math.PI))
+                .splineTo(new Pose2d(-5,36,Math.PI),new ConstantInterpolator(Math.PI))
+                .lineTo(new Vector2d(12,36),new ConstantInterpolator(Math.PI))
+                .splineTo(new Pose2d(45,26.5,Math.PI),new ConstantInterpolator(Math.PI))
                 .build());
         update();
 
@@ -228,8 +228,8 @@ public class BlueThreeStone extends LinearOpMode {
                     rightGrab.close();
                     return Unit.INSTANCE;
                 })
-                .lineTo(new Vector2d(58,30),new LinearInterpolator(Math.PI,-Math.PI/2))
-                .lineTo(new Vector2d(58,21),new ConstantInterpolator(Math.PI/2))
+                .lineTo(new Vector2d(56,30),new LinearInterpolator(Math.PI,-Math.PI/2))
+                .lineTo(new Vector2d(56,21),new ConstantInterpolator(Math.PI/2))
                 .build());
         update();
 
@@ -237,22 +237,17 @@ public class BlueThreeStone extends LinearOpMode {
         waitFor(300);
 
         drive.followTrajectory(drive.trajectoryBuilder()
-                .lineTo(new Vector2d(40,64),new LinearInterpolator(Math.PI/2,Math.PI/1.5))
+                .lineTo(new Vector2d(36,64),new LinearInterpolator(Math.PI/2,Math.PI/1.3))
                 .build());
         update();
         hook.close();
         waitFor(100);
 
-        drive.followTrajectory(drive.trajectoryBuilder()
-                .splineTo(new Pose2d(20,44,Math.PI),new ConstantInterpolator(Math.PI))
-                .lineTo(new Vector2d(4,44),new ConstantInterpolator(Math.PI))
+        drive.followTrajectory(new TrajectoryBuilder(new Pose2d(drive.getPoseEstimate().getX(),drive.getPoseEstimate().getY(),-Math.PI/1.3),DriveConstants.BASE_CONSTRAINTS)
+                .splineTo(new Pose2d(24,48,Math.PI),new ConstantInterpolator(Math.PI))
+                .lineTo(new Vector2d(4,48),new ConstantInterpolator(Math.PI))
                 .build());
         update();
-
-
-
-
-
 
     }
     public void update(){
