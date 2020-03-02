@@ -57,7 +57,7 @@ public class NewTeleOp extends LinearOpMode {
 
 
         leftGrab.close();
-        leftGrab.retract();
+        leftGrab.setBigPosition(0.4);
         rightGrab.close();
         rightGrab.retract();
         double multiplier=0.5;
@@ -95,10 +95,16 @@ public class NewTeleOp extends LinearOpMode {
 
 
             // slide
-            if(lift.isExtended && claw.isClosed && gamepad2.left_stick_y > 0){
+            if(capstoneMechanism.isExtended && lift.getCurrentHeight()<3){
+                lift.setPower(0.3*-gamepad2.left_stick_y);
+            }
+            else if(lift.getCurrentHeight()<5&&gamepad2.left_stick_y>0){
+                lift.setPower(0.13*-gamepad2.left_stick_y);
+            }
+            else if(lift.isExtended && claw.isClosed && gamepad2.left_stick_y > 0){
                 lift.setPower(Math.pow(-gamepad2.left_stick_y,3)*0.13);
             } else {
-                lift.setPower(Math.pow(-gamepad2.left_stick_y,3)*1.1);
+                lift.setPower(-gamepad2.left_stick_y);
             }
 
             // intake

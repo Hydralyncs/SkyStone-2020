@@ -70,18 +70,18 @@ public class RedThreeStone extends LinearOpMode {
         detector.phoneCam.stopStreaming();
 
         drive.followTrajectory(drive.trajectoryBuilder()
+                .addMarker(0.7,()->{
+                    leftGrab.setBigPosition(0.1);
+                    leftGrab.setSmallPosition(0);
+                    return Unit.INSTANCE;
+                })
                 .splineTo(new Pose2d(-15,-35,0))
                 .build());
         update();
 
         drive.followTrajectory(drive.trajectoryBuilder()
                 .reverse()
-                .addMarker(()->{
-                    leftGrab.setBigPosition(0.1);
-                    leftGrab.setSmallPosition(0);
-                    return Unit.INSTANCE;
-                })
-                .lineTo(new Vector2d(-20-(8*stonePosition),-32),new ConstantInterpolator(0))
+                .lineTo(new Vector2d(-19-(8*stonePosition),-32),new ConstantInterpolator(0))
                 .build());
         update();
 
@@ -90,7 +90,7 @@ public class RedThreeStone extends LinearOpMode {
                     leftGrab.extend();
                     return Unit.INSTANCE;
                 })
-                .lineTo(new Vector2d(-20-(8*stonePosition),-31),new ConstantInterpolator(0))
+                .lineTo(new Vector2d(-19-(8*stonePosition),-31),new ConstantInterpolator(0))
                 .build());
         update();
 
@@ -99,10 +99,10 @@ public class RedThreeStone extends LinearOpMode {
         leftGrab.setBigPosition(0.35);
         waitFor(100);
 
-        drive.followTrajectory(drive.trajectoryBuilder()
-                .splineTo(new Pose2d(-10,-39,0),new ConstantInterpolator(0))
-                .lineTo(new Vector2d(10,-39),new ConstantInterpolator(0))
-                .splineTo(new Pose2d(49,-30,0),new ConstantInterpolator(0))
+        drive.followTrajectory(new TrajectoryBuilder(new Pose2d(drive.getPoseEstimate().getX(),drive.getPoseEstimate().getY(),-Math.PI/4),DriveConstants.BASE_CONSTRAINTS)
+                .splineTo(new Pose2d(-10,-41,0),new ConstantInterpolator(0))
+                .lineTo(new Vector2d(10,-41),new ConstantInterpolator(0))
+                .splineTo(new Pose2d(49,-29.5,0),new ConstantInterpolator(0))
                 .build());
         update();
 
@@ -126,24 +126,24 @@ public class RedThreeStone extends LinearOpMode {
 
         drive.followTrajectory(drive.trajectoryBuilder()
                 .reverse()
-                .splineTo(new Pose2d(10,-36,0),new ConstantInterpolator(0))
-                .lineTo(new Vector2d(-35,-36), new ConstantInterpolator(0))
+                .splineTo(new Pose2d(10,-34,0),new ConstantInterpolator(0))
+                .lineTo(new Vector2d(-0,-34), new ConstantInterpolator(0))
                 .addMarker(()->{
                     leftGrab.setBigPosition(0.1);
                     leftGrab.setSmallPosition(0);
                     return Unit.INSTANCE;
                 })
-                .splineTo(new Pose2d(-44-(8*stonePosition),-29,0),new ConstantInterpolator(0))
+                .splineTo(new Pose2d(-43-(8*stonePosition),-30,0),new ConstantInterpolator(0))
                 .build());
         update();
 
         drive.followTrajectory(drive.trajectoryBuilder()
-                .addMarker(new Vector2d(-44-(8*stonePosition),-27.5),()->{
+                .addMarker(new Vector2d(-43-(8*stonePosition),-29),()->{
                     leftGrab.extend();
                     leftGrab.close();
                     return Unit.INSTANCE;
                 })
-                .lineTo(new Vector2d(-44-(8*stonePosition),-27),new ConstantInterpolator(0))
+                .lineTo(new Vector2d(-43-(8*stonePosition),-28),new ConstantInterpolator(0))
                 .build());
         update();
 
@@ -152,9 +152,9 @@ public class RedThreeStone extends LinearOpMode {
         waitFor(100);
 
         drive.followTrajectory(drive.trajectoryBuilder()
-                .splineTo(new Pose2d(-10,-39,0),new ConstantInterpolator(0))
-                .lineTo(new Vector2d(10,-39),new ConstantInterpolator(0))
-                .splineTo(new Pose2d(58,-28,0),new ConstantInterpolator(0))
+                .splineTo(new Pose2d(-10,-36,0),new ConstantInterpolator(0))
+                .lineTo(new Vector2d(10,-36),new ConstantInterpolator(0))
+                .splineTo(new Pose2d(58,-26,0),new ConstantInterpolator(0))
                 .build());
         update();
 
@@ -176,22 +176,22 @@ public class RedThreeStone extends LinearOpMode {
                     leftGrab.close();
                     return Unit.INSTANCE;
                 })
-                .splineTo(new Pose2d(5,-35,0),new ConstantInterpolator(0))
-                .addMarker(new Vector2d(-2,-35),()->{
+                .splineTo(new Pose2d(5,-33,0),new ConstantInterpolator(0))
+                .addMarker(new Vector2d(-2,-33),()->{
                     leftGrab.setBigPosition(0.1);
                     leftGrab.setSmallPosition(0);
                     return Unit.INSTANCE;
                 })
-                .splineTo(new Pose2d(thirdStoneXPos,-27,0),new ConstantInterpolator(0))
+                .splineTo(new Pose2d(thirdStoneXPos,-25,0),new ConstantInterpolator(0))
                 .build());
         update();
 
         drive.followTrajectory(drive.trajectoryBuilder()
-                .addMarker(new Vector2d(thirdStoneXPos,-25.5),()->{
+                .addMarker(new Vector2d(thirdStoneXPos,-23),()->{
                     leftGrab.close();
                     return Unit.INSTANCE;
                 })
-                .lineTo(new Vector2d(thirdStoneXPos,-25),new ConstantInterpolator(0))
+                .lineTo(new Vector2d(thirdStoneXPos,-22),new ConstantInterpolator(0))
                 .build());
         update();
 
@@ -199,10 +199,9 @@ public class RedThreeStone extends LinearOpMode {
         leftGrab.setBigPosition(0.35);
         waitFor(100);
 
-        drive.followTrajectory(drive.trajectoryBuilder()
-                .splineTo(new Pose2d(-7,-38,0),new ConstantInterpolator(0))
-                .lineTo(new Vector2d(12,-38),new ConstantInterpolator(0))
-                .splineTo(new Pose2d(48,-26,0),new ConstantInterpolator(0))
+        drive.followTrajectory(new TrajectoryBuilder(new Pose2d(drive.getPoseEstimate().getX(),drive.getPoseEstimate().getY(),-Math.PI/4),DriveConstants.BASE_CONSTRAINTS)
+                .splineTo(new Pose2d(-7,-34,0),new ConstantInterpolator(0))
+                .splineTo(new Pose2d(48,-24,0),new ConstantInterpolator(0))
                 .build());
         update();
 
@@ -221,8 +220,8 @@ public class RedThreeStone extends LinearOpMode {
                     leftGrab.close();
                     return Unit.INSTANCE;
                 })
-                .lineTo(new Vector2d(58,-30),new LinearInterpolator(0,-Math.PI/2))
-                .lineTo(new Vector2d(58,-21),new ConstantInterpolator(-Math.PI/2))
+                .lineTo(new Vector2d(58,-28),new LinearInterpolator(0,-Math.PI/2))
+                .lineTo(new Vector2d(58,-18),new ConstantInterpolator(-Math.PI/2))
                 .build());
         update();
 
@@ -230,15 +229,15 @@ public class RedThreeStone extends LinearOpMode {
         waitFor(300);
 
         drive.followTrajectory(drive.trajectoryBuilder()
-                .lineTo(new Vector2d(40,-64),new LinearInterpolator(-Math.PI/2,-Math.PI/1.5))
+                .lineTo(new Vector2d(36,-60),new LinearInterpolator(-Math.PI/2,-Math.PI/1.5))
                 .build());
         update();
         hook.close();
         waitFor(100);
 
         drive.followTrajectory(new TrajectoryBuilder(new Pose2d(drive.getPoseEstimate().getX(),drive.getPoseEstimate().getY(),Math.PI/2), DriveConstants.BASE_CONSTRAINTS)
-                .splineTo(new Pose2d(24,-34,Math.PI),new ConstantInterpolator(Math.PI))
-                .lineTo(new Vector2d(4,-34),new ConstantInterpolator(Math.PI))
+                .splineTo(new Pose2d(24,-32,Math.PI),new ConstantInterpolator(Math.PI))
+                .lineTo(new Vector2d(4,-32),new ConstantInterpolator(Math.PI))
                 .build());
         update();
 

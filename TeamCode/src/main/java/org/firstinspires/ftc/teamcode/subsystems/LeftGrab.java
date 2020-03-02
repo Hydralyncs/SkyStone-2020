@@ -14,7 +14,7 @@ public class LeftGrab {
     private double OPEN_POS = 0.15; // middle
     private double CLOSE_POS = .6;
 
-    private double RETRACT_POS = 0.5; // middle
+    private double RETRACT_POS = 0.475; // middle
     private double EXTEND_POS = 0.05;
 
 

@@ -9,9 +9,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 @Config
 public class CapstoneMechanism {
 
-    private boolean isExtended = false;
+    public boolean isExtended = false;
 
-    public static double EXTEND_POS = 0.65;
+    public static double EXTEND_POS = 0.63;
     public static double RETRACT_POS = 0.15;
 
     private Servo servo;
